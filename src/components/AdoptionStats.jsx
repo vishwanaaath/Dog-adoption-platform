@@ -7,7 +7,7 @@ const AdoptionStats = () => {
     <div
       className="flex items-center justify-start min-h-screen text-white p-6 "
       style={{
-        backgroundImage: "url('/images/bg-image.svg')",
+        backgroundImage: "url('/src/images/bg-image.svg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}>
