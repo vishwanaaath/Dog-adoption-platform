@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@media (max-width: 640px) { /* Adjust breakpoint as needed */
+  .mobile-bg {
+    background-image: url('/src/assets/m-bg.jpg') !important;
+  }
+}

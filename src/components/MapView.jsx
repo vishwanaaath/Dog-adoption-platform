@@ -77,7 +77,7 @@ const MapView = () => {
     { name: "White", imageUrl: "./src/assets/white.jpg" },
     { name: "Brown and White", imageUrl: "./src/assets/brown-white.jpg" },
     { name: "Black and White", imageUrl: "./src/assets/black-white.jpg" },
-    { name: "other", imageUrl: "/path/to/spotted-dog.jpg" },
+    { name: "other", imageUrl: "/path/to/spotted-dog.jpg" }, 
   ];
 
   return (

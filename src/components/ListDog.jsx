@@ -7,6 +7,7 @@ const ListDog = () => {
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           List a Dog Page
         </h1>
+          
         <p className="text-xl text-gray-600">
           This page is currently under construction
         </p>
@@ -16,10 +17,6 @@ const ListDog = () => {
 };
 
 export default ListDog;
-
-
-
-
 
 
 
