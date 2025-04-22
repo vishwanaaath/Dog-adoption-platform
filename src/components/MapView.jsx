@@ -114,7 +114,7 @@ const MapView = () => {
       {/* Left edge detection zone with indicator */}
       <div
         className="edge-detector fixed left-0 top-0 h-full w-4 z-[1000] transition-all duration-200"
-        onMouseEnter={() => setSidebarVisible(true)} 
+        onMouseEnter={() => setSidebarVisible(true)}
         onMouseLeave={handleSidebarLeave}>
         <div
           className={`absolute top-1/2 -translate-y-1/2 left-1 w-8 h-8 invert-50 rounded-lg   flex items-center justify-center cursor-pointer  transition-all duration-300 ${
@@ -133,10 +133,12 @@ const MapView = () => {
         }`}
         onMouseEnter={() => setSidebarVisible(true)}
         onMouseLeave={handleSidebarLeave}>
-        <div className=" pt-3 pb-2 flex justify-center items-center">
-          <Link to="/profile" className="flex items-center space-x-4 group">
-            <div className="flex items-center ">
-              <div className="w-16 h-16 rounded-full  overflow-hidden">
+        <Link
+          to="/profile"
+          className="flex w-full p-3  transition-colors">
+          <div className="flex w-full items-start gap-4">
+            <div className="flex-shrink-0">
+              <div className="w-15 h-15  rounded-full overflow-hidden border-2 border-gray-100">
                 <img
                   src="./images/profile.jpg"
                   alt="Profile"
@@ -144,14 +146,14 @@ const MapView = () => {
                 />
               </div>
             </div>
-            <div className="flex  flex-col justify-center">
-              <p className="text-1xl font-bold group-hover:text-blue-500 transition">
+            <div className="flex flex-col mt-1.5 justify-center flex-1">
+              <p className="text-lg font-semibold text-gray-800">
                 Your Profile
               </p>
-              <p className="text-xs text-gray-500">3 dogs listed</p>
+              <p className="text-xs text-gray-500 mt-1">3 dogs listed</p>
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
 
         <div className="p-6 flex flex-col">
           <h2 className="text-xl font-bold mb-6 text-gray-800">Filters</h2>
