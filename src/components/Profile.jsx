@@ -39,7 +39,7 @@ const Profile = () => {
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8">
             <div className="w-24 h-24 rounded-full bg-gray-200 overflow-hidden">
               <img
-                src="./src/assets/profile.jpg"
+                src="./public/assets/profile.jpg"
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
