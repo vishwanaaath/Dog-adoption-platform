@@ -71,6 +71,7 @@ const ListDog = () => {
             lng: position.coords.longitude,
           });
           setStep(4);
+          setIsLoadingLocation(false);
         },
         (error) => {
           alert("Error getting location: " + error.message);
@@ -537,15 +538,15 @@ const ListDog = () => {
         )}
 
         {/* Navigation buttons */}
-        {step > 1 && step < 6 && (
+        {step > 1 && step <= 6 && (
           <div className="flex justify-between mt-8">
             <button
               type="button"
               onClick={() => setStep(step - 1)}
               className="px-4 py-2 text-gray-600 hover:text-gray-800">
-              Back
+              {step !== 6 ? "Back" : "Edit"}
             </button>
-            {step !== 5 && ( // Skip next button for location and contact steps
+            {step < 5 && ( // Skip next button for location and contact steps
               <button
                 type="button"
                 onClick={() => {
