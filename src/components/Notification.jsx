@@ -15,15 +15,16 @@ const Notification = ({ message, image, duration = 3000 }) => {
 
   return (
     <div
-      className={`fixed top-6 left-1/2 transform -translate-x-1/2
- transition-all duration-300 ${
-   isVisible ? "translate-y-0 opacity-100" : "-translate-y-8 opacity-0"
- } z-5000`}>
-      <div className="backdrop-blur-md bg-white/90 text-black px-2 py-2 rounded-2xl shadow-2xl flex items-center space-x-3 w-[90vw] max-w-sm border border-gray-300">
+      className={`fixed top-6 flex justify-center items-center w-auto min-w-[7cm] max-w-[7cm] left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
+        isVisible ? "translate-y-0 opacity-100" : "-translate-y-8 opacity-0"
+      } z-5000`}>
+      <div className="backdrop-blur-md bg-white/90 text-black px-3 py-2 rounded-2xl shadow-2xl flex items-center space-x-3 w-auto min-w-[6cm] max-w-full border border-gray-300">
         {/* <span className="text-green-600 text-xl">✅</span> */}
         <img
           src={image}
-          className="w-[40px] h-[40px] rounded  object-cover"
+          className={`w-[40px] h-[40px] object-cover ${
+            image === "./images/profile.jpg" ? "rounded-full" : "rounded"
+          }`}
           alt=""
         />
         <p className="text-sm font-medium">{message}</p>

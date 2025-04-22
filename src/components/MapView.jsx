@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import Notification from "./Notification";
- 
+import ResetViewControl from "./ResetViewControl";
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -17,26 +18,29 @@ L.Icon.Default.mergeOptions({
 
 const dogIcon = new L.Icon({
   iconUrl: "./images/dog6.svg",
-  iconSize: [25,25],
+  iconSize: [25, 25],
 });
 
- 
 const MapView = () => {
   const [location, setLocation] = useState(null);
   const [dogLocations, setDogLocations] = useState([]);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [showCopied, setShowCopied] = useState(false);
-  const [isContactAsked, setisContactAsked] = useState(false); 
+  const [isContactAsked, setisContactAsked] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState(null);
   const [notificationImage, setnotificationImage] = useState(null);
   const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [initialPosition, setInitialPosition] = useState(null);
+  const [initialZoom, setInitialZoom] = useState(14);
 
+  // Update your useEffect to set initial position
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const userLocation = [pos.coords.latitude, pos.coords.longitude];
         setLocation(userLocation);
+        setInitialPosition(userLocation);
         setDogLocations(
           generateNearbyLocations(
             pos.coords.latitude,
@@ -49,15 +53,13 @@ const MapView = () => {
       (err) => console.error("Error getting location:", err)
     );
   }, []);
-  
+
   const handleColorSelect = (colorName) => {
     setSelectedColor(colorName.name);
     setIsColorDropdownOpen(false);
     setNotificationMessage(`${colorName.name} filter applied`);
-    setnotificationImage(colorName.imageUrl );
-    
+    setnotificationImage(colorName.imageUrl);
   };
-
 
   const generateNearbyLocations = (lat, lon, count, radiusMeters) => {
     const locations = [];
@@ -76,7 +78,6 @@ const MapView = () => {
     }
     return locations;
   };
- 
 
   const handleSidebarLeave = (e) => {
     if (!e.relatedTarget?.closest(".sidebar-container, .edge-detector")) {
@@ -133,7 +134,7 @@ const MapView = () => {
         }`}
         onMouseEnter={() => setSidebarVisible(true)}
         onMouseLeave={handleSidebarLeave}>
-        <div className=" pt-3 pb-2 mr-8  flex justify-center items-center">
+        <div className=" pt-3 pb-2 flex justify-center items-center">
           <Link to="/profile" className="flex items-center space-x-4 group">
             <div className="flex items-center ">
               <div className="w-16 h-16 rounded-full  overflow-hidden">
@@ -153,7 +154,7 @@ const MapView = () => {
           </Link>
         </div>
 
-        <div className="p-6 h-full flex flex-col">
+        <div className="p-6 flex flex-col">
           <h2 className="text-xl font-bold mb-6 text-gray-800">Filters</h2>
           <div className="space-y-6 flex-1 overflow-y-auto">
             <div>
@@ -204,19 +205,39 @@ const MapView = () => {
             </div>
           </div>
         </div>
+
+        <div className=" fixed bottom-0 w-full p-2 flex items-center justify-center    ">
+          <button
+            onClick={() => {
+              console.log("User logged out");
+              setNotificationMessage("Successfully logged out");
+              setnotificationImage("./images/profile.jpg");
+            }}
+            className="  text-red-500     ">
+            Log Out
+          </button>
+        </div>
       </div>
 
       {/* Map Container */}
       {location ? (
         <MapContainer
-          onClick={() => console.log("clicked")}
           center={location}
           zoom={14}
-          className="w-full h-full">
+          className="w-full h-full"
+          whenCreated={(map) => {
+            setInitialZoom(map.getZoom());
+          }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
+          {initialPosition && (
+            <ResetViewControl
+              initialPosition={initialPosition}
+              initialZoom={initialZoom}
+            />
+          )}
           <Marker position={location}>
             <Popup>You are here</Popup>
           </Marker>
