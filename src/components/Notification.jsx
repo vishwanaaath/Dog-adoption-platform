@@ -22,9 +22,7 @@ const Notification = ({ message, image, duration = 3000 }) => {
         {/* <span className="text-green-600 text-xl">✅</span> */}
         <img
           src={image}
-          className={`w-[40px] h-[40px] object-cover ${
-            image === "./images/profile.jpg" ? "rounded-full" : "rounded"
-          }`}
+          className="w-[40px] h-[40px] object-cover  rounded-full"
           alt=""
         />
         <p className="text-sm text-white font-medium">{message}</p>
