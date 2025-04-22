@@ -17,7 +17,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const dogIcon = new L.Icon({
-  iconUrl: "/src/assets/dog6.svg",
+  iconUrl: "./images/dog6.svg",
   iconSize: [35, 35],
 });
 
