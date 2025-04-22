@@ -1,18 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./AdoptionStats.css";
 
 const AdoptionStats = () => {
   let dogsAdopted = 250;
   let dogsListed = 800;
 
   return (
-    <div
-      className="flex flex-col items-start justify-center min-h-screen text-white p-6"
-      style={{
-        backgroundImage: "url('./images/bg-image.svg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}>
+    <div className="hero-section flex flex-col items-start justify-center min-h-screen text-white p-6">
       <div className="w-full max-w-4xl text-center">
         <h2 className="text-5xl font-semibold mb-8">
           Helping you adopt indies around you

@@ -1,0 +1,11 @@
+.hero-section {
+  background-image: url('/images/bg-image.svg');
+  background-size: cover;
+  background-position: center;
+}
+ 
+@media (max-width: 640px) {
+  .hero-section {
+    background-image: url('/images/m-bg.jpg');
+  }
+}
