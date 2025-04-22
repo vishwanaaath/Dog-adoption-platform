@@ -223,7 +223,7 @@ const MapView = () => {
       {location ? (
         <MapContainer
           center={location}
-          zoom={17}
+          zoom={16}
           className="w-full h-full"
           whenCreated={(map) => {
             setInitialZoom(map.getZoom());
