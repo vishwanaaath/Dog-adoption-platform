@@ -20,7 +20,7 @@ const ListDog = () => {
   const [istypeDropdownOpen, setIstypeDropdownOpen] = useState(false);
   const [isAgeDropdownOpen, setIsAgeDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({});
-
+  
   // Dog type data with your specified images
   const dogType = [
     { name: "Brown", imageUrl: "./src/assets/Brown.jpg" },
@@ -45,7 +45,7 @@ const ListDog = () => {
     return re.test(email);
   };
 
-  // Validate phone number format (basic validation)
+  // Validate phone number format  
   const validatePhone = (phone) => {
     const re = /^[0-9]{10,15}$/;
     return re.test(phone);
@@ -70,7 +70,7 @@ const ListDog = () => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           });
-          setStep(4); // Move to age selection
+          setStep(4);
         },
         (error) => {
           alert("Error getting location: " + error.message);
@@ -81,7 +81,6 @@ const ListDog = () => {
     }
   };
 
-  // Validate contact information
   const validateContactInfo = () => {
     const newErrors = {};
 
@@ -105,7 +104,6 @@ const ListDog = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate contact info before submission
     if (!validateContactInfo()) {
       return;
     }
@@ -120,7 +118,6 @@ const ListDog = () => {
     };
     console.log("Dog listed:", dogData);
     alert("Dog listing submitted successfully!");
-    // Reset form
     setStep(1);
     setDogImage(null);
     setPreviewImage(null);

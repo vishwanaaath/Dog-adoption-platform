@@ -5,8 +5,7 @@ import L from "leaflet";
 import { Link } from "react-router-dom";
 import "./MapView.css"; 
 
-
-// Fix Leaflet's default icons
+ 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -67,8 +66,7 @@ const MapView = () => {
     }
     return locations;
   };
-
-  // const handleSearch = (e) => setSearchQuery(e.target.value);
+ 
 
   const handleSidebarLeave = (e) => {
     if (!e.relatedTarget?.closest(".sidebar-container, .edge-detector")) {
@@ -185,16 +183,7 @@ const MapView = () => {
         </div>
       </div>
 
-      {/* Search Bar */}
-      {/* <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-[1002] w-full max-w-xl px-4  ">
-        <input
-          type="text"
-          placeholder="Search area or dog type..."
-          className="w-full px-6 py-3 rounded-full shadow-xl border-2  border-gray-200 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all duration-200"
-          value={searchQuery}
-          onChange={handleSearch}
-        />
-      </div> */}
+      
 
       {/* Map Container */}
       {location ? (
@@ -293,8 +282,7 @@ const MapView = () => {
                         src="./src/assets/copy.svg"
                         alt=""
                       />
-                    </div>
-                    {/* Same for phone */}
+                    </div> 
                   </div>
                 ) : null}
               </Popup>
