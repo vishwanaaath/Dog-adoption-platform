@@ -220,17 +220,15 @@ const MapView = () => {
                   </span>
 
                   <a
-                    href={`https://www.google.com/maps?q=${dog.lat},${dog.lon}`}
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${dog.lat},${dog.lon}&travelmode=walking`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="
-                     
-                     transition-opacity">
+                    className="transition-opacity hover:opacity-80">
                     <img
                       className="w-[34px] h-[34px] pt-1.5"
-                      src="./images/location.svg"
-                      alt="Location"
-                      title="Go to pinned Location"
+                      src="/images/location.svg" // Changed to absolute path
+                      alt="Get walking directions"
+                      title="Get walking directions to this location"
                     />
                   </a>
 
