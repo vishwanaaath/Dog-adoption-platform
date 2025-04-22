@@ -1,30 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import './Profile.css'
+import { useState } from "react";
+import { Link } from "react-router-dom"; 
 
 const Profile = () => {
+  const [ShowProfilePic, setShowProfilePic] = useState(false);
 
-  
   const dogType = [
     { name: "Brown", imageUrl: "./images/Brown.jpg" },
     { name: "Black", imageUrl: "./images/black.jpg" },
-    { name: "other", imageUrl: "./images/spotted-dog.jpg" }, 
+    { name: "other", imageUrl: "./images/spotted-dog.jpg" },
     { name: "White", imageUrl: "./images/white.jpg" },
     { name: "Brown and White", imageUrl: "./images/brown-white.jpg" },
-    { name: "Black and White", imageUrl: "./images/black-white.jpg" }, 
-    { name: "Blank", imageUrl: "./images/blank.png" }, 
-    
+    { name: "Black and White", imageUrl: "./images/black-white.jpg" },
+    { name: "Blank", imageUrl: "./images/blank.png" },
   ];
   return (
-    <div className="min-h-screen bg-[#F7F6F1] p-6">
-      
-      <div className="max-w-4xl mx-auto">
+    <div
+      className={` bg-[#F7F6F1] ${ShowProfilePic ? "p-0" : "p-6"}`}
+      style={{
+        maxHeight: ShowProfilePic ? "100vh" : "auto",
+        overflow: ShowProfilePic ? "hidden" : "auto",
+      }}>
+      {ShowProfilePic && (
+        <div
+          className={` absolute z-10 backdrop-blur-2xl backdrop-brightness-80 verflow-hidden w-[100%] flex justify-center items-center min-h-screen min-w-screen`}>
+          <img
+            src="./images/profile.jpg"
+            className="sm:w-88 sm:h-88 cursor-pointer w-54 h-54 rounded-full"
+            alt="Profile"
+            onClick={() => setShowProfilePic(false)}
+          />
+        </div>
+      )}
+
+      <div className="max-w-4xl mx-auto ">
         <Link
           to="/"
-          className="inline-flex items-center mb-6 text-blue-500 hover:text-blue-700">
+          className="inline-flex items-center mb-4 text-blue-500 hover:text-blue-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-1"
+            className="h-5 w-5 "
             viewBox="0 0 20 20"
             fill="currentColor">
             <path
@@ -41,7 +56,8 @@ const Profile = () => {
               <img
                 src="./images/profile.jpg"
                 alt="Profile"
-                className="w-full h-full object-cover"
+                className="w-full h-full cursor-pointer object-cover"
+                onClick={() => setShowProfilePic(true)}
               />
             </div>
             <div>
@@ -65,8 +81,9 @@ const Profile = () => {
               <p className="text-gray-600">7675719761</p>
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
-              <h3 className="font-medium text-gray-700 mb-2">See all dogs on map</h3>
-               
+              <h3 className="font-medium text-gray-700 mb-2">
+                See all dogs on map
+              </h3>
             </div>
           </div>
 
@@ -75,7 +92,7 @@ const Profile = () => {
               Your Recent Listings
             </h2>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-              {[1, 2, 3, 4, 5, 6,7].map((item, index) => (
+              {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
                 <div key={item} className="break-inside-avoid mb-4">
                   {/* Image container with gradient overlay */}
                   <div className="relative overflow-hidden rounded-lg group">
@@ -99,8 +116,6 @@ const Profile = () => {
                       </p>
                     </div>
                   </div>
-
-                   
                 </div>
               ))}
             </div>

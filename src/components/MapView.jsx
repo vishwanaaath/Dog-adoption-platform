@@ -57,6 +57,7 @@ const MapView = () => {
   const handleColorSelect = (colorName) => {
     setSelectedColor(colorName.name);
     setIsColorDropdownOpen(false);
+    setSidebarVisible(false); // Add this line
     setNotificationMessage(`${colorName.name} filter applied`);
     setnotificationImage(colorName.imageUrl);
   };
@@ -80,7 +81,11 @@ const MapView = () => {
   };
 
   const handleSidebarLeave = (e) => {
-    if (!e.relatedTarget?.closest(".sidebar-container, .edge-detector")) {
+    const relatedTarget = e.relatedTarget;
+    if (
+      !(relatedTarget instanceof Element) ||
+      !relatedTarget.closest(".sidebar-container, .edge-detector")
+    ) {
       setSidebarVisible(false);
     }
   };
@@ -133,9 +138,7 @@ const MapView = () => {
         }`}
         onMouseEnter={() => setSidebarVisible(true)}
         onMouseLeave={handleSidebarLeave}>
-        <Link
-          to="/profile"
-          className="flex w-full p-3  transition-colors">
+        <Link to="/profile" className="flex w-full p-3  transition-colors">
           <div className="flex w-full items-start gap-4">
             <div className="flex-shrink-0">
               <div className="w-15 h-15  rounded-full overflow-hidden border-2 border-gray-100">
@@ -207,14 +210,19 @@ const MapView = () => {
           </div>
         </div>
 
-        <div className=" fixed bottom-0 w-full p-2 flex items-center justify-center    ">
-          <button
-            onClick={() => {
-              console.log("User logged out");
-              setNotificationMessage("Successfully logged out");
-              setnotificationImage("./images/profile.jpg");
-            }}
-            className="  text-red-500     ">
+        <div
+          onClick={() => {
+            console.log("User logged out");
+            setNotificationMessage("Successfully logged out");
+            setnotificationImage("./images/profile.jpg");
+          }}
+          className=" fixed bottom-0 mb-4 w-full p-2 flex items-center justify-center  cursor-pointer   ">
+          <img
+            src="./images/logout.svg"
+            className="w-[20px] h-[20px] mr-2 "
+            alt=""
+          />
+          <button className="  text-red-500 text-lg  cursor-pointer    ">
             Log Out
           </button>
         </div>
