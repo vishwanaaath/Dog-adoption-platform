@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { Link } from "react-router-dom";
+import "./MapView.css"; 
+
 
 // Fix Leaflet's default icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -15,15 +18,17 @@ L.Icon.Default.mergeOptions({
 });
 
 const dogIcon = new L.Icon({
-  iconUrl: "/src/assets/marker.svg",
-  iconSize: [55, 55],
+  iconUrl: "/src/assets/dog6.svg",
+  iconSize: [35, 35],
 });
 
+ 
 const MapView = () => {
   const [location, setLocation] = useState(null);
   const [dogLocations, setDogLocations] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [showCopied, setShowCopied] = useState(false);
+  const [isContactAsked, setisContactAsked] = useState(false); 
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -34,14 +39,16 @@ const MapView = () => {
           generateNearbyLocations(
             pos.coords.latitude,
             pos.coords.longitude,
-            10,
-            5000
+            6,
+            2000
           )
         );
       },
       (err) => console.error("Error getting location:", err)
     );
   }, []);
+  
+
 
   const generateNearbyLocations = (lat, lon, count, radiusMeters) => {
     const locations = [];
@@ -71,13 +78,13 @@ const MapView = () => {
   const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
 
-  const dogColors = [
+  const dogType = [
     { name: "Brown", imageUrl: "./src/assets/Brown.jpg" },
     { name: "Black", imageUrl: "./src/assets/black.jpg" },
     { name: "White", imageUrl: "./src/assets/white.jpg" },
     { name: "Brown and White", imageUrl: "./src/assets/brown-white.jpg" },
     { name: "Black and White", imageUrl: "./src/assets/black-white.jpg" },
-    { name: "other", imageUrl: "/path/to/spotted-dog.jpg" }, 
+    { name: "other", imageUrl: "./src/assets/spotted-dog.jpg" },
   ];
 
   return (
@@ -99,13 +106,33 @@ const MapView = () => {
 
       {/* Sidebar */}
       <div
-        className={`sidebar-container fixed left-0 top-0 h-full w-[230px] bg-[#F7F6F1] shadow-xl transform transition-transform duration-300 z-[1001] ${
+        className={`sidebar-container fixed left-0 top-0 h-full w-[230px] bg-[#fff] shadow-xl transform transition-transform duration-300 z-[1001] ${
           sidebarVisible ? "translate-x-0" : "-translate-x-full"
         }`}
         onMouseEnter={() => setSidebarVisible(true)}
         onMouseLeave={handleSidebarLeave}>
+        <div className=" pt-3 pb-2 mr-8  flex justify-center items-center">
+          <Link to="/profile" className="flex items-center space-x-4 group">
+            <div className="flex items-center ">
+              <div className="w-16 h-16 rounded-full  overflow-hidden">
+                <img
+                  src="./src/assets/profile.jpg"
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <div className="flex  flex-col justify-center">
+              <p className="text-1xl font-bold group-hover:text-blue-500 transition">
+                Your Profile
+              </p>
+              <p className="text-xs text-gray-500">3 dogs listed</p>
+            </div>
+          </Link>
+        </div>
+
         <div className="p-6 h-full flex flex-col">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800">Filters</h2>
+          <h2 className="text-xl font-bold mb-6 text-gray-800">Filters</h2>
           <div className="space-y-6 flex-1 overflow-y-auto">
             <div>
               <h3 className="font-semibold mb-3 text-gray-700">Dog Color</h3>
@@ -114,26 +141,30 @@ const MapView = () => {
                 <button
                   className="w-full px-4 py-2 rounded-lg border border-gray-300  text-center mb-2"
                   onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}>
-                  {selectedColor || "Choose Dog Color"}
+                  {selectedColor || "Choose Dog Type"}
                 </button>
 
                 {isColorDropdownOpen && (
                   <div className="  w-full  bg-[#F7F6F1] rounded-lg p-2">
-                    {/* Replace these divs with actual img tags */}
                     <div className="flex overflow-x-scroll gap-2 pb-2">
-                      {dogColors.map((color) => (
-                        <img
-                          key={color.name}
-                          src={color.imageUrl}
-                          alt={color.name}
-                          title={color.name}
-                          className={`flex-shrink-0 w-40 h-40 object-cover rounded-lg cursor-pointer border-2 ${
-                            selectedColor === color.name
-                              ? "border-blue-400"
-                              : "border-transparent"
-                          } hover:border-blue-400`}
-                          onClick={() => setSelectedColor(color.name)}
-                        />
+                      {dogType.map((typeItem) => (
+                        <div key={typeItem.name} className="flex-shrink-0 w-40">
+                          <img
+                            src={typeItem.imageUrl}
+                            alt={typeItem.name}
+                            title={typeItem.name}
+                            className={`w-40 h-40 object-cover rounded-lg cursor-pointer border-2 ${
+                              selectedColor === typeItem.name
+                                ? "border-blue-400"
+                                : "border-transparent"
+                            } hover:border-blue-400`}
+                            onClick={() => {setSelectedColor(typeItem.name)
+                            }}
+                          />
+                          <span className="block text-center mt-1 text-sm font-medium text-gray-700">
+                            {typeItem.name}
+                          </span>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -150,19 +181,6 @@ const MapView = () => {
                 <option>No Limit</option>
               </select>
             </div>
-            <div>
-              <h3 className="font-semibold mb-3 text-gray-700">Last Seen</h3>
-              <div className="space-y-2">
-                <label className="flex items-center">
-                  <input type="checkbox" className="mr-2" />
-                  Last 24 hours
-                </label>
-                <label className="flex items-center">
-                  <input type="checkbox" className="mr-2" />
-                  Last week
-                </label>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -171,7 +189,7 @@ const MapView = () => {
       {/* <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-[1002] w-full max-w-xl px-4  ">
         <input
           type="text"
-          placeholder="Search area or dog breed..."
+          placeholder="Search area or dog type..."
           className="w-full px-6 py-3 rounded-full shadow-xl border-2  border-gray-200 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all duration-200"
           value={searchQuery}
           onChange={handleSearch}
@@ -180,7 +198,11 @@ const MapView = () => {
 
       {/* Map Container */}
       {location ? (
-        <MapContainer center={location} zoom={15} className="w-full h-full">
+        <MapContainer
+          onClick={() => console.log("clicked")}
+          center={location}
+          zoom={16}
+          className="w-full h-full">
           <TileLayer
             url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -189,8 +211,93 @@ const MapView = () => {
             <Popup>You are here</Popup>
           </Marker>
           {dogLocations.map((dog, index) => (
-            <Marker key={index} position={[dog.lat, dog.lon]} icon={dogIcon}>
-              <Popup>{dog.name}</Popup>
+            <Marker
+              className="scaled-popup"
+              key={index}
+              position={[dog.lat, dog.lon]}
+              icon={dogIcon}>
+              <Popup>
+                <img
+                  className="p-1 rounded-2xl "
+                  src={
+                    dogType[index]?.imageUrl
+                      ? dogType[index].imageUrl
+                      : "./src/assets/black.jpg"
+                  }
+                  alt=""
+                />
+                <div className="flex items-center     gap-3 p-2">
+                  <span className="text-[14px] font-medium  text-blue-300 ">
+                    {dog.name}
+                  </span>
+
+                  <a
+                    href={`https://www.google.com/maps?q=${dog.lat},${dog.lon}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                     
+                     transition-opacity">
+                    <img
+                      className="w-[34px] h-[34px] pt-1.5"
+                      src="./src/assets/location.svg"
+                      alt="Location"
+                      title="Go to pinned Location"
+                    />
+                  </a>
+
+                  <img
+                    onClick={() => setisContactAsked(!isContactAsked)}
+                    className="w-[25px] h-[25px] text-sm font-medium  text-blue-300    
+                    transition-opacity"
+                    src="./src/assets/contact.svg"
+                    alt="Contact"
+                    title="Contact Lister"
+                  />
+                </div>
+
+                {isContactAsked ? (
+                  <div className="contact text-sm font-medium text-black-300 relative">
+                    {showCopied && (
+                      <div className="absolute -top-8 left-0 bg-gray-800 text-white px-2 py-1 rounded text-xs">
+                        Copied!
+                      </div>
+                    )}
+                    <div
+                      className="email text-[14px] flex items-center gap-2 cursor-pointer  "
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          "vishwanathgowda951@gmail.com"
+                        );
+                        setShowCopied(true);
+                        setTimeout(() => setShowCopied(false), 2000);
+                      }}>
+                      vishwanathgowda951@gmail.com
+                      <img
+                        className="w-[15px] h-[15px] invert-50"
+                        src="./src/assets/copy.svg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div
+                      className="phone text-[14px] flex items-center gap-2 cursor-pointer  "
+                      onClick={() => {
+                        navigator.clipboard.writeText("7675719761");
+                        setShowCopied(true);
+                        setTimeout(() => setShowCopied(false), 2000);
+                      }}>
+                      7675719761
+                      <img
+                        className="w-[15px] h-[15px] invert-50"
+                        src="./src/assets/copy.svg"
+                        alt=""
+                      />
+                    </div>
+                    {/* Same for phone */}
+                  </div>
+                ) : null}
+              </Popup>
             </Marker>
           ))}
         </MapContainer>
