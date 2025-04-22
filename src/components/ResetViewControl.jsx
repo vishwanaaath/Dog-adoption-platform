@@ -34,7 +34,7 @@ function ResetViewControl({ initialPosition, initialZoom }) {
       <div className="leaflet-control">
         <button
           onClick={resetView}
-          className=" sm:mb-15 mb-25 mr-3  bg-white rounded-full   "
+          className=" sm:mb-15 mb-35 mr-3  bg-white rounded-full   "
           title="Reset to original view">
           <img
             src="./images/locate.svg"
