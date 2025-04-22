@@ -189,7 +189,7 @@ const MapView = () => {
         <MapContainer
           onClick={() => console.log("clicked")}
           center={location}
-          zoom={16}
+          zoom={14}
           className="w-full h-full">
           <TileLayer
             url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
