@@ -95,11 +95,26 @@ const MapView = () => {
 
   return (
     <div className="relative w-screen h-screen  bg-[#F7F6F1]">
-      <Notification message={notificationMessage} image={notificationImage} duration={1500} />
+      <Notification
+        message={notificationMessage}
+        image={notificationImage}
+        duration={1500}
+      />
+
+      {/* Overlay for closing sidebar on click/touch */}
+      {sidebarVisible && (
+        <div
+          className="fixed inset-0 z-[999]"
+          onClick={() => setSidebarVisible(false)}
+          onTouchStart={() => setSidebarVisible(false)}
+        />
+      )}
+
       {/* Left edge detection zone with indicator */}
       <div
         className="edge-detector fixed left-0 top-0 h-full w-4 z-[1000] transition-all duration-200"
         onMouseEnter={() => setSidebarVisible(true)}
+        onTouchStart={() => setSidebarVisible(true)} // Add touch support
         onMouseLeave={handleSidebarLeave}>
         <div
           className={`absolute top-1/2 -translate-y-1/2 left-1 w-8 h-8 invert-50 rounded-lg   flex items-center justify-center cursor-pointer  transition-all duration-300 ${
