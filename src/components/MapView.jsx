@@ -77,12 +77,12 @@ const MapView = () => {
   const [selectedColor, setSelectedColor] = useState(null);
 
   const dogType = [
-    { name: "Brown", imageUrl: "./src/assets/Brown.jpg" },
-    { name: "Black", imageUrl: "./src/assets/black.jpg" },
-    { name: "White", imageUrl: "./src/assets/white.jpg" },
-    { name: "Brown and White", imageUrl: "./src/assets/brown-white.jpg" },
-    { name: "Black and White", imageUrl: "./src/assets/black-white.jpg" },
-    { name: "other", imageUrl: "./src/assets/spotted-dog.jpg" },
+    { name: "Brown", imageUrl: "./images/Brown.jpg" },
+    { name: "Black", imageUrl: "./images/black.jpg" },
+    { name: "White", imageUrl: "./images/white.jpg" },
+    { name: "Brown and White", imageUrl: "./images/brown-white.jpg" },
+    { name: "Black and White", imageUrl: "./images/black-white.jpg" },
+    { name: "other", imageUrl: "./images/spotted-dog.jpg" },
   ];
 
   return (
@@ -114,7 +114,7 @@ const MapView = () => {
             <div className="flex items-center ">
               <div className="w-16 h-16 rounded-full  overflow-hidden">
                 <img
-                  src="./src/assets/profile.jpg"
+                  src="./images/profile.jpg"
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />
@@ -156,7 +156,8 @@ const MapView = () => {
                                 ? "border-blue-400"
                                 : "border-transparent"
                             } hover:border-blue-400`}
-                            onClick={() => {setSelectedColor(typeItem.name)
+                            onClick={() => {
+                              setSelectedColor(typeItem.name);
                             }}
                           />
                           <span className="block text-center mt-1 text-sm font-medium text-gray-700">
@@ -182,8 +183,6 @@ const MapView = () => {
           </div>
         </div>
       </div>
-
-      
 
       {/* Map Container */}
       {location ? (
@@ -211,7 +210,7 @@ const MapView = () => {
                   src={
                     dogType[index]?.imageUrl
                       ? dogType[index].imageUrl
-                      : "./src/assets/black.jpg"
+                      : "./images/black.jpg"
                   }
                   alt=""
                 />
@@ -229,7 +228,7 @@ const MapView = () => {
                      transition-opacity">
                     <img
                       className="w-[34px] h-[34px] pt-1.5"
-                      src="./src/assets/location.svg"
+                      src="./images/location.svg"
                       alt="Location"
                       title="Go to pinned Location"
                     />
@@ -239,7 +238,7 @@ const MapView = () => {
                     onClick={() => setisContactAsked(!isContactAsked)}
                     className="w-[25px] h-[25px] text-sm font-medium  text-blue-300    
                     transition-opacity"
-                    src="./src/assets/contact.svg"
+                    src="./images/contact.svg"
                     alt="Contact"
                     title="Contact Lister"
                   />
@@ -264,7 +263,7 @@ const MapView = () => {
                       vishwanathgowda951@gmail.com
                       <img
                         className="w-[15px] h-[15px] invert-50"
-                        src="./src/assets/copy.svg"
+                        src="./images/copy.svg"
                         alt=""
                       />
                     </div>
@@ -279,10 +278,10 @@ const MapView = () => {
                       7675719761
                       <img
                         className="w-[15px] h-[15px] invert-50"
-                        src="./src/assets/copy.svg"
+                        src="./images/copy.svg"
                         alt=""
                       />
-                    </div> 
+                    </div>
                   </div>
                 ) : null}
               </Popup>

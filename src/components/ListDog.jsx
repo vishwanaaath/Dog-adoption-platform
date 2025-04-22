@@ -20,15 +20,15 @@ const ListDog = () => {
   const [istypeDropdownOpen, setIstypeDropdownOpen] = useState(false);
   const [isAgeDropdownOpen, setIsAgeDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({});
-  
+
   // Dog type data with your specified images
   const dogType = [
-    { name: "Brown", imageUrl: "./src/assets/Brown.jpg" },
-    { name: "Black", imageUrl: "./src/assets/black.jpg" },
-    { name: "White", imageUrl: "./src/assets/white.jpg" },
-    { name: "Brown and White", imageUrl: "./src/assets/brown-white.jpg" },
-    { name: "Black and White", imageUrl: "./src/assets/black-white.jpg" },
-    { name: "Other", imageUrl: "./src/assets/spotted-dog.jpg" },
+    { name: "Brown", imageUrl: "./images/Brown.jpg" },
+    { name: "Black", imageUrl: "./images/black.jpg" },
+    { name: "White", imageUrl: "./images/white.jpg" },
+    { name: "Brown and White", imageUrl: "./images/brown-white.jpg" },
+    { name: "Black and White", imageUrl: "./images/black-white.jpg" },
+    { name: "Other", imageUrl: "./images/spotted-dog.jpg" },
   ];
 
   const ageRanges = [
