@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { Link } from "react-router-dom";
-import "./MapView.css"; 
-
+import { Link } from "react-router-dom"; 
+import Notification from "./Notification";
  
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -28,6 +27,10 @@ const MapView = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [showCopied, setShowCopied] = useState(false);
   const [isContactAsked, setisContactAsked] = useState(false); 
+  const [notificationMessage, setNotificationMessage] = useState(null);
+  const [notificationImage, setnotificationImage] = useState(null);
+  const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState(null);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -47,6 +50,13 @@ const MapView = () => {
     );
   }, []);
   
+  const handleColorSelect = (colorName) => {
+    setSelectedColor(colorName.name);
+    setIsColorDropdownOpen(false);
+    setNotificationMessage(`${colorName.name} filter applied`);
+    setnotificationImage(colorName.imageUrl );
+    
+  };
 
 
   const generateNearbyLocations = (lat, lon, count, radiusMeters) => {
@@ -73,8 +83,6 @@ const MapView = () => {
       setSidebarVisible(false);
     }
   };
-  const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(null);
 
   const dogType = [
     { name: "Brown", imageUrl: "./images/Brown.jpg" },
@@ -87,6 +95,7 @@ const MapView = () => {
 
   return (
     <div className="relative w-screen h-screen  bg-[#F7F6F1]">
+      <Notification message={notificationMessage} image={notificationImage} duration={1500} />
       {/* Left edge detection zone with indicator */}
       <div
         className="edge-detector fixed left-0 top-0 h-full w-4 z-[1000] transition-all duration-200"
@@ -156,9 +165,7 @@ const MapView = () => {
                                 ? "border-blue-400"
                                 : "border-transparent"
                             } hover:border-blue-400`}
-                            onClick={() => {
-                              setSelectedColor(typeItem.name);
-                            }}
+                            onClick={() => handleColorSelect(typeItem)}
                           />
                           <span className="block text-center mt-1 text-sm font-medium text-gray-700">
                             {typeItem.name}
@@ -220,15 +227,15 @@ const MapView = () => {
                   </span>
 
                   <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${dog.lat},${dog.lon}&travelmode=walking`}
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${dog.lat},${dog.lon}&travelmode=driving`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="transition-opacity hover:opacity-80">
                     <img
                       className="w-[34px] h-[34px] pt-1.5"
                       src="/images/location.svg" // Changed to absolute path
-                      alt="Get walking directions"
-                      title="Get walking directions to this location"
+                      alt="Get directions"
+                      title="Get directions to this location"
                     />
                   </a>
 
