@@ -46,7 +46,7 @@ const MapView = () => {
             pos.coords.latitude,
             pos.coords.longitude,
             6,
-            2000
+            1000
           )
         );
       },
@@ -223,7 +223,7 @@ const MapView = () => {
       {location ? (
         <MapContainer
           center={location}
-          zoom={14}
+          zoom={17}
           className="w-full h-full"
           whenCreated={(map) => {
             setInitialZoom(map.getZoom());
