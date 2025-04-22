@@ -14,7 +14,7 @@ const AdoptionStats = () => {
               text-center md:text-left 
               px-4 md:px-0 
               leading-tight md:leading-normal
-              mb-6 mt-10 md:mb-8
+              mb-6 mt-15 md:mb-8
               max-w-2xl md:max-w-4xl mx-auto md:mx-0">
           Helping you adopt indies around you
         </h1>
