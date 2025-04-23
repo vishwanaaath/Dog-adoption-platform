@@ -140,7 +140,7 @@ const ListDog = () => {
       formData.append("file", dogImage);
 
       const uploadResponse = await axios.post(
-        "http://localhost:5000/upload",
+        "https://dog-adoption-platform-backend.onrender.com",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
