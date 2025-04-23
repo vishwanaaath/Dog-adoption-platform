@@ -139,11 +139,11 @@ const ListDog = () => {
       const formData = new FormData();
       formData.append("file", dogImage);
 
-      const uploadResponse = await axios.post(
-        "https://dog-adoption-platform-backend.onrender.com",
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+     const uploadResponse = await axios.post(
+       "https://dog-adoption-platform-backend.onrender.com/upload", // Added /upload
+       formData,
+       { headers: { "Content-Type": "multipart/form-data" } }
+     );
 
       // Create final dog data with Supabase URL
       const dogData = {
