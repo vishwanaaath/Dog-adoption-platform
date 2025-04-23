@@ -23,13 +23,38 @@ const ListDog = () => {
   const [errors, setErrors] = useState({});
 
   // Dog type data with your specified images
+
   const dogType = [
-    { name: "Brown", imageUrl: "./images/Brown.jpg" },
-    { name: "Black", imageUrl: "./images/black.jpg" },
-    { name: "White", imageUrl: "./images/white.jpg" },
-    { name: "Brown and White", imageUrl: "./images/brown-white.jpg" },
-    { name: "Black and White", imageUrl: "./images/black-white.jpg" },
-    { name: "Other", imageUrl: "./images/spotted-dog.jpg" },
+    {
+      name: "Brown",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745405159873-Brown.jpg",
+    },
+    {
+      name: "Black",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745406357610-black.jpg",
+    },
+    {
+      name: "White",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745406393596-white.jpg",
+    },
+    {
+      name: "Brown and White",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745405559806-brown-white.jpg",
+    },
+    {
+      name: "Black and White",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745405701747-black-white.jpg",
+    },
+    {
+      name: "Unique",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745406502654-spotted-dog.jpg",
+    },
   ];
 
   const ageRanges = [

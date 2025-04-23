@@ -5,14 +5,38 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   const [ShowProfilePic, setShowProfilePic] = useState(false);
 
+ 
   const dogType = [
-    { name: "Brown", imageUrl: "./images/Brown.jpg" },
-    { name: "Black", imageUrl: "./images/black.jpg" },
-    { name: "other", imageUrl: "./images/spotted-dog.jpg" },
-    { name: "White", imageUrl: "./images/white.jpg" },
-    { name: "Brown and White", imageUrl: "./images/brown-white.jpg" },
-    { name: "Black and White", imageUrl: "./images/black-white.jpg" },
-    { name: "Blank", imageUrl: "./images/blank.png" },
+    {
+      name: "Brown",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745405159873-Brown.jpg",
+    },
+    {
+      name: "Black",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745406357610-black.jpg",
+    },
+    {
+      name: "White",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745406393596-white.jpg",
+    },
+    {
+      name: "Brown and White",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745405559806-brown-white.jpg",
+    },
+    {
+      name: "Black and White",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745405701747-black-white.jpg",
+    },
+    {
+      name: "Unique",
+      imageUrl:
+        "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745406502654-spotted-dog.jpg",
+    },
   ];
   return (
     <div
@@ -92,7 +116,7 @@ const Profile = () => {
               Your Recent Listings
             </h2>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-              {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
+              {[1, 2, 3, 4, 5, 6].map((item, index) => (
                 <div key={item} className="break-inside-avoid mb-4">
                   {/* Image container with gradient overlay */}
                   <div className="relative overflow-hidden rounded-lg group">
