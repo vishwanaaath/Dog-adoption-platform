@@ -54,6 +54,7 @@ const ListDog = () => {
     {
       name: "u",
       imageUrl:
+      
         "https://svoxpghpsuritltipmqb.supabase.co/storage/v1/object/public/bucket1/uploads/1745406502654-spotted-dog.jpg",
     },
   ];

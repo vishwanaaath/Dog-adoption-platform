@@ -85,10 +85,17 @@ const Profile = () => {
               />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">
-                {" "}
-                Vishwanath Gowda
-              </h1>
+              <div className="flex items-center gap-2"> 
+                <h1 className="text-2xl font-bold text-gray-800 whitespace-nowrap overflow-hidden text-ellipsis max-w-[250px] sm:max-w-none">
+                  Vishwanath Gowda
+                </h1> 
+                <img
+                  src="./images/paw.png"
+                  className="w-5 h-5 flex-shrink-0 translate-y-[3px]"
+                  alt="Paw badge"
+                  title="Paw badge"
+                />
+              </div>
               <p className="text-gray-600">Member since June 2023</p>
             </div>
           </div>
