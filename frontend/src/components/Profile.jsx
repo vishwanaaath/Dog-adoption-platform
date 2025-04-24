@@ -50,7 +50,7 @@ const Profile = () => {
           className={` absolute z-10 backdrop-blur-2xl backdrop-brightness-80 verflow-hidden w-[100%] flex justify-center items-center min-h-screen min-w-screen`}>
           <img
             src="./images/profile.jpg"
-            className="sm:w-88 sm:h-88 cursor-pointer w-54 h-54 rounded-full"
+            className="sm:w-88 sm:h-88 cursor-pointer w-58 h-58 rounded-full"
             alt="Profile"
             onClick={() => setShowProfilePic(false)}
           />
@@ -91,7 +91,7 @@ const Profile = () => {
                 </h1> 
                 <img
                   src="./images/paw.png"
-                  className="w-5 h-5 flex-shrink-0 translate-y-[3px]"
+                  className="w-5 h-5 flex-shrink-0 translate-y-[1px]"
                   alt="Paw badge"
                   title="Paw badge"
                 />

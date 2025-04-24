@@ -141,19 +141,21 @@ const MapView = () => {
       )}
 
       {/* Left edge detection zone with indicator */}
-      <div
-        className="edge-detector fixed left-0 top-0 h-full w-4 z-[1000] transition-all duration-200"
-        onMouseEnter={() => setSidebarVisible(true)}
-        onMouseLeave={handleSidebarLeave}>
+      {location && (
         <div
-          className={`absolute top-1/2 -translate-y-1/2 left-1 w-8 h-8 invert-50 rounded-lg   flex items-center justify-center cursor-pointer  transition-all duration-300 ${
-            sidebarVisible
-              ? "opacity-0 -translate-x-8"
-              : "opacity-100 translate-x-2 hover:translate-x-3"
-          }`}>
-          <img src="./images/left.svg" alt="" />
+          className="edge-detector fixed left-0 top-0 h-full w-4 z-[1000] transition-all duration-200"
+          onMouseEnter={() => setSidebarVisible(true)}
+          onMouseLeave={handleSidebarLeave}>
+          <div
+            className={`absolute top-1/2 -translate-y-1/2 left-1 w-8 h-8 invert-50 rounded-lg   flex items-center justify-center cursor-pointer  transition-all duration-300 ${
+              sidebarVisible
+                ? "opacity-0 -translate-x-8"
+                : "opacity-100 translate-x-2 hover:translate-x-3"
+            }`}>
+            <img src="./images/left.svg" alt="" />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Sidebar */}
       <div
